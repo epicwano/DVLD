@@ -1,0 +1,13 @@
+/[Bb]in/
+/[Oo]bj/
+/.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+x64/
+x86/
+[Dd]ebug/
+[Rr]elease/
+*.nupkg
+packages/
