@@ -57,7 +57,10 @@ namespace BusinessLayer
 
         }
 
-
+        public static DataTable GetAllPepole()
+        {
+            return clsPersonData.GetAllPeople();
+        }
 
 
 

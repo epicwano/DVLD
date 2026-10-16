@@ -54,6 +54,8 @@ namespace DataAccessLayer
 
                 }
 
+                reader.Close();
+
             }
             catch
             {
@@ -67,8 +69,42 @@ namespace DataAccessLayer
             return isFound;
         }
 
+        public static DataTable GetAllPeople()
+        {
+            DataTable DT = new DataTable();
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
+            string Query =
+                @"
+                    Select * From People;  
+                ";
 
+            SqlCommand command = new SqlCommand(Query, connection);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                    DT.Load(reader);
+
+                reader.Close();
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return DT;
+
+        }
 
 
 
