@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PresentationLayer.People;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace PresentationLayer
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListPepole frm = new frmListPepole();
+            frm.ShowDialog();
         }
     }
 }
