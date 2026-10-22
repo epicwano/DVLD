@@ -7,7 +7,7 @@ namespace DataAccessLayer
     public class clsPersonData
     {
 
-        public static bool GetPersonByID(int PersonID,ref string FirstName, ref string SecondName, ref String ThridName, ref string LastName
+        public static bool GetPersonByID(int PersonID,ref string NationalNo, ref string FirstName, ref string SecondName, ref String ThridName, ref string LastName
             , ref DateTime DateOfBrith, ref byte Gendor, ref string Address, ref string Phone, ref string Email, ref int Nationality, ref string ImagePath)
         {
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -33,6 +33,7 @@ namespace DataAccessLayer
                 {
                     isFound = true;
 
+                    NationalNo = (string)reader["NationalNo"];
                     FirstName = (string)reader["FirstName"];
                     SecondName = (string)reader["SecondName"];
 
@@ -42,7 +43,7 @@ namespace DataAccessLayer
                         ThridName = "";
 
                     LastName = (string)reader["LastName"];
-                    DateOfBrith = (DateTime)reader["DateOfBrith"];
+                    DateOfBrith = (DateTime)reader["DateOfBirth"];
                     Gendor = (byte)reader["Gendor"];
                     Address = (string)reader["Address"];
                     Phone = (string)reader["Phone"];
@@ -51,6 +52,8 @@ namespace DataAccessLayer
                         Email = (string)reader["Email"];
                     else
                         Email = "";
+
+                    Nationality = (int)reader["NationalityCountryID"];
 
                     if (reader["ImagePath"] != DBNull.Value)
                         ImagePath = (string)reader["ImagePath"];
@@ -118,7 +121,36 @@ namespace DataAccessLayer
 
         }
 
+        public static bool Delete(int PersonID)
+        {
+            int RowsAffected = 0;
 
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string Query = @"Delete From People Where PersonID = @PersonID";
+
+            SqlCommand command = new SqlCommand(Query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+
+                RowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowsAffected > 0);
+
+
+        }
 
     }
 }

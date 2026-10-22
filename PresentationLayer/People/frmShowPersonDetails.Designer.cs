@@ -28,19 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label1 = new System.Windows.Forms.Label();
+            this.ctrlPersonCard1 = new PresentationLayer.People.Controls.ctrlPersonCard();
             this.SuspendLayout();
             // 
-            // ShowPersonDetails
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 45F);
+            this.label1.Location = new System.Drawing.Point(247, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(408, 72);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Person Details";
+            // 
+            // ctrlPersonCard1
+            // 
+            this.ctrlPersonCard1.Location = new System.Drawing.Point(79, 94);
+            this.ctrlPersonCard1.Name = "ctrlPersonCard1";
+            this.ctrlPersonCard1.Size = new System.Drawing.Size(759, 378);
+            this.ctrlPersonCard1.TabIndex = 2;
+            // 
+            // frmShowPersonDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 497);
-            this.Name = "ShowPersonDetails";
+            this.Controls.Add(this.ctrlPersonCard1);
+            this.Controls.Add(this.label1);
+            this.Name = "frmShowPersonDetails";
             this.Text = "ShowPersonDetails";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
+        private Controls.ctrlPersonCard ctrlPersonCard1;
     }
 }

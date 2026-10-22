@@ -22,7 +22,7 @@ namespace PresentationLayer.People
         enum enFilterBy {None = 0,PersonID = 1, NationalNo = 2, FirstName = 3, SecondName = 4, ThirdName = 5, LastName = 6,
             CountryName = 7, Gendor = 8, Email = 9, Phone = 10 }
 
-        DataView DV = ClsPerson.GetAllPepole().DefaultView;
+        DataView DV;
         enFilterBy Filter = (enFilterBy)0;
         
 
@@ -42,14 +42,15 @@ namespace PresentationLayer.People
 
         private void _RefreshPeopleList()
         {
+            DV = ClsPerson.GetAllPepole().DefaultView;
             dgvListPeople.DataSource = DV;
             lblTotalRecords.Text = dgvListPeople.RowCount.ToString();
         }
 
         private void _Load()
         {
-            DV.Table.CaseSensitive = false;
             _RefreshPeopleList();
+            DV.Table.CaseSensitive = false;
             cbFliterBy.SelectedIndex = 0;
 
             
@@ -92,8 +93,39 @@ namespace PresentationLayer.People
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
-            frmShowPersonDetails frm = new frmShowPersonDetails();
+            
+        }
+
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowPersonDetails frm = new frmShowPersonDetails((int)dgvListPeople.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Srue you want to delete this Person","Confrimtion",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (ClsPerson.Delete((int)dgvListPeople.CurrentRow.Cells[0].Value) == true)
+                {
+                    MessageBox.Show("Person With ID " + (int)dgvListPeople.CurrentRow.Cells[0].Value + "Deleted succssfully");
+                    _RefreshPeopleList();
+                }
+                else
+                {
+                    MessageBox.Show("Cannot delete this person because he is involve with other things");
+                }
+            }
+        }
+
+        private void sendEmailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Fauture is not Ready Yet");
+        }
+
+        private void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Fauture is not Ready Yet");
         }
     }
 }

@@ -12,9 +12,13 @@ namespace PresentationLayer.People
 {
     public partial class frmShowPersonDetails : Form
     {
-        public frmShowPersonDetails()
+        //private int _PersonID = -1;
+
+        public frmShowPersonDetails(int PersonID)
         {
             InitializeComponent();
+            //_PersonID = PersonID;
+            ctrlPersonCard1.LoadPersonInfo(PersonID);
         }
     }
 }

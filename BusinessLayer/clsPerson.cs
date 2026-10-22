@@ -8,6 +8,7 @@ namespace BusinessLayer
         private enum enMode { AddNew = 1, Update = 2 };
 
         public int PersonID { get; set; }
+        public string NationalNo { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string ThirdName { get; set; }
@@ -21,10 +22,11 @@ namespace BusinessLayer
         public string ImagePath { get; set; }
         private enMode CurrentMode = enMode.AddNew;
 
-        private ClsPerson(int PersonID,string FirstName,string SecondName,string thirdName,string LastName
+        private ClsPerson(int PersonID,string NationalNo, string FirstName,string SecondName,string thirdName,string LastName
             ,DateTime DateOfBrith,byte Gendor,string Address,string Phone,string Email,int Nationality,string ImagePath)
         {
             this.PersonID = PersonID;
+            this.NationalNo = NationalNo;
             this.FirstName = FirstName;
             this.SecondName = SecondName;
             this.ThirdName = ThirdName;
@@ -40,17 +42,22 @@ namespace BusinessLayer
             this.CurrentMode = enMode.Update;
         }
 
+        public ClsPerson()
+        {
+
+        }
+
         public static ClsPerson Find(int PersonID)
         {
-            string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", phone = "", Email = "", ImagePath = "";
+            string NationalNo = "", FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", phone = "", Email = "", ImagePath = "";
             DateTime DateOfBrith = DateTime.Now;
             byte Gendor = 1;
             int Nationality = -1;
 
-            if ((clsPersonData.GetPersonByID(PersonID, ref FirstName, ref SecondName, ref ThirdName, ref LastName, ref DateOfBrith,
+            if ((clsPersonData.GetPersonByID(PersonID,ref NationalNo, ref FirstName, ref SecondName, ref ThirdName, ref LastName, ref DateOfBrith,
                 ref Gendor, ref Address, ref phone, ref Email, ref Nationality, ref ImagePath)))
             {
-                return new ClsPerson(PersonID, FirstName, SecondName, ThirdName, LastName, DateOfBrith, Gendor, Address, phone, Email, Nationality, ImagePath);
+                return new ClsPerson(PersonID,NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBrith, Gendor, Address, phone, Email, Nationality, ImagePath);
             }
             else
                 return null;
@@ -62,7 +69,10 @@ namespace BusinessLayer
             return clsPersonData.GetAllPeople();
         }
 
-
+        public static bool Delete(int PersonID)
+        {
+            return clsPersonData.Delete(PersonID);
+        }
 
     }
 }
