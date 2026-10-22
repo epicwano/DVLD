@@ -8,7 +8,7 @@ namespace DataAccessLayer
     {
 
         public static bool GetPersonByID(int PersonID,ref string FirstName, ref string SecondName, ref String ThridName, ref string LastName
-            , ref DateTime DateOfBrith, ref bool Gendor, ref string Address, ref string Phone, ref string Email, ref int Nationality, ref string ImagePath)
+            , ref DateTime DateOfBrith, ref byte Gendor, ref string Address, ref string Phone, ref string Email, ref int Nationality, ref string ImagePath)
         {
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
@@ -35,10 +35,15 @@ namespace DataAccessLayer
 
                     FirstName = (string)reader["FirstName"];
                     SecondName = (string)reader["SecondName"];
-                    ThridName = (string)reader["ThirdName"];
+
+                    if (reader["ThirdName"] != DBNull.Value)
+                        ThridName = (string)reader["ThirdName"];
+                    else
+                        ThridName = "";
+
                     LastName = (string)reader["LastName"];
                     DateOfBrith = (DateTime)reader["DateOfBrith"];
-                    Gendor = (bool)reader["Gendor"];
+                    Gendor = (byte)reader["Gendor"];
                     Address = (string)reader["Address"];
                     Phone = (string)reader["Phone"];
 
@@ -76,7 +81,14 @@ namespace DataAccessLayer
 
             string Query =
                 @"
-                    Select * From People;  
+                   SELECT   People.PersonID, People.NationalNo, People.FirstName, People.SecondName, 
+                            People.ThirdName, People.LastName, People.DateOfBirth, Gendor = 
+                    Case 
+                    When Gendor = 1 then 'Female' when Gendor = 0 then 'Male' ELSE 'UnKnown' END,
+                            People.Address, People.Phone, People.Email, Countries.CountryName, People.ImagePath
+                    FROM        Countries INNER JOIN
+                                People ON 
+                    Countries.CountryID = People.NationalityCountryID 
                 ";
 
             SqlCommand command = new SqlCommand(Query, connection);

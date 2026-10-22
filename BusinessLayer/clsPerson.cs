@@ -13,7 +13,7 @@ namespace BusinessLayer
         public string ThirdName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBrith { get; set; }
-        public bool Gendor { get; set; }
+        public byte Gendor { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -22,7 +22,7 @@ namespace BusinessLayer
         private enMode CurrentMode = enMode.AddNew;
 
         private ClsPerson(int PersonID,string FirstName,string SecondName,string thirdName,string LastName
-            ,DateTime DateOfBrith,bool Gendor,string Address,string Phone,string Email,int Nationality,string ImagePath)
+            ,DateTime DateOfBrith,byte Gendor,string Address,string Phone,string Email,int Nationality,string ImagePath)
         {
             this.PersonID = PersonID;
             this.FirstName = FirstName;
@@ -44,7 +44,7 @@ namespace BusinessLayer
         {
             string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", phone = "", Email = "", ImagePath = "";
             DateTime DateOfBrith = DateTime.Now;
-            bool Gendor = false;
+            byte Gendor = 1;
             int Nationality = -1;
 
             if ((clsPersonData.GetPersonByID(PersonID, ref FirstName, ref SecondName, ref ThirdName, ref LastName, ref DateOfBrith,
