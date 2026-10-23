@@ -44,7 +44,21 @@ namespace BusinessLayer
 
         public ClsPerson()
         {
+            this.PersonID = -1;
+            this.NationalNo = "";
+            this.FirstName = "";
+            this.SecondName = "";
+            this.ThirdName = "";
+            this.LastName = "";
+            this.DateOfBrith = DateTime.Now;
+            this.Gendor = 0;
+            this.Address = "";
+            this.Phone = "";
+            this.Email = "";
+            this.Nationality = -1;
+            this.ImagePath = "";
 
+            this.CurrentMode = enMode.AddNew;
         }
 
         public static ClsPerson Find(int PersonID)
@@ -73,6 +87,44 @@ namespace BusinessLayer
         {
             return clsPersonData.Delete(PersonID);
         }
+
+        private bool _AddNewPerson()
+        {
+            this.PersonID = clsPersonData.AddNewPerson(this.NationalNo, this.FirstName, this.SecondName, this.ThirdName, this.LastName
+                ,this.DateOfBrith, this.Gendor, this.Address, this.Phone, this.Email, this.Nationality, this.ImagePath);
+
+            return (this.PersonID != -1);
+
+        }
+        
+        private bool _Update()
+        {
+
+            return clsPersonData.Update(this.PersonID, this.NationalNo, this.FirstName, this.SecondName, this.ThirdName, this.LastName
+                , this.DateOfBrith, this.Gendor, this.Address, this.Phone, this.Email, this.Nationality, this.ImagePath);
+
+        }
+
+        public bool Save()
+        {
+            switch (CurrentMode)
+            {
+
+                case enMode.AddNew:
+                    if (_AddNewPerson())
+                        return true;
+                    else
+                        return false;
+
+                case enMode.Update:
+                    return _Update();
+
+            }
+
+            return false;
+
+        }
+
 
     }
 }

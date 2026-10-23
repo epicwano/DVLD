@@ -60,8 +60,8 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.plPersonInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +71,7 @@
             this.lblAddOrUpdatePerson.AutoSize = true;
             this.lblAddOrUpdatePerson.Font = new System.Drawing.Font("Tahoma", 35F);
             this.lblAddOrUpdatePerson.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblAddOrUpdatePerson.Location = new System.Drawing.Point(295, 28);
+            this.lblAddOrUpdatePerson.Location = new System.Drawing.Point(279, 31);
             this.lblAddOrUpdatePerson.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAddOrUpdatePerson.Name = "lblAddOrUpdatePerson";
             this.lblAddOrUpdatePerson.Size = new System.Drawing.Size(367, 57);
@@ -118,8 +118,8 @@
             // 
             // plPersonInfo
             // 
-            this.plPersonInfo.Controls.Add(this.button2);
-            this.plPersonInfo.Controls.Add(this.button1);
+            this.plPersonInfo.Controls.Add(this.btnSave);
+            this.plPersonInfo.Controls.Add(this.btnClose);
             this.plPersonInfo.Controls.Add(this.txtAddress);
             this.plPersonInfo.Controls.Add(this.label14);
             this.plPersonInfo.Controls.Add(this.txtEmail);
@@ -402,25 +402,27 @@
             this.txtAddress.Size = new System.Drawing.Size(596, 65);
             this.txtAddress.TabIndex = 31;
             // 
-            // button1
+            // btnClose
             // 
-            this.button1.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.button1.Location = new System.Drawing.Point(388, 432);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(159, 39);
-            this.button1.TabIndex = 32;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnClose.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.btnClose.Location = new System.Drawing.Point(388, 432);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(159, 39);
+            this.btnClose.TabIndex = 32;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // button2
+            // btnSave
             // 
-            this.button2.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.button2.Location = new System.Drawing.Point(570, 432);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(159, 39);
-            this.button2.TabIndex = 33;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSave.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.btnSave.Location = new System.Drawing.Point(570, 432);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(159, 39);
+            this.btnSave.TabIndex = 33;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmAddOrUpdatePerson
             // 
@@ -437,6 +439,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmAddOrUpdatePerson";
             this.Text = "frmAddOrUpdatePerson";
+            this.Load += new System.EventHandler(this.frmAddOrUpdatePerson_Load);
             this.plPersonInfo.ResumeLayout(false);
             this.plPersonInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
@@ -474,8 +477,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.RadioButton rbFemale;
         private System.Windows.Forms.RadioButton rbMale;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtEmail;

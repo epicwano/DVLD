@@ -91,10 +91,7 @@ namespace PresentationLayer.People
             this.Close();
         }
 
-        private void btnAddNewPerson_Click(object sender, EventArgs e)
-        {
-            
-        }
+
 
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -126,6 +123,27 @@ namespace PresentationLayer.People
         private void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This Fauture is not Ready Yet");
+        }
+
+        private void btnAddNewPerson_Click(object sender, EventArgs e)
+        {
+            frmAddOrUpdatePerson frm = new frmAddOrUpdatePerson(-1);
+            frm.ShowDialog();
+            _RefreshPeopleList();
+        }
+
+        private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddOrUpdatePerson frm = new frmAddOrUpdatePerson(-1);
+            frm.ShowDialog();
+            _RefreshPeopleList();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddOrUpdatePerson frm = new frmAddOrUpdatePerson((int)dgvListPeople.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            _RefreshPeopleList();
         }
     }
 }
