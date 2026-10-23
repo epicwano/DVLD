@@ -18,7 +18,6 @@ namespace PresentationLayer.People
         private int _PersonID = -1;
         private ClsPerson _Person;
 
-
         public frmAddOrUpdatePerson(int PersonID)
         {
             InitializeComponent();
@@ -49,6 +48,11 @@ namespace PresentationLayer.People
         {
             _FillCountriesInComboBox();
             cbCountries.SelectedText = "Yemen";
+
+            TimeSpan ts = new TimeSpan(6570, 0, 0, 0);
+            dtpDateOfBirth.MaxDate = DateTime.Now - ts;
+
+            rbMale.Select();
 
             if (_Mode == enMode.AddNew)
             {
@@ -92,8 +96,77 @@ namespace PresentationLayer.People
             this.Close();        
         }
 
+        private bool _EmailFormat()
+        {
+            if (txtEmail.Text != "" && (txtEmail.Text.Contains("@") && txtEmail.Text.Contains(".com")))
+                return true;
+            else if (txtEmail.Text == "")
+                return true;
+            else
+                return false;
+   
+        }
+
+        private bool _Vaildtion(TextBox textBox)
+        {
+            if (textBox.Text == "")
+            {
+                ErrorProvider.SetError(textBox, "Requried to fill");
+                return true;
+            }
+            else
+            {
+                ErrorProvider.SetError(textBox, "");
+                return false;
+            }
+
+        }
+
+        private bool _IsPersonExsits(string NationalNO)
+        {
+
+            if (ClsPerson.isPersonExists(txtNationalNO.Text))
+            {
+                ErrorProvider.SetError(txtNationalNO, "National Number is used for anthoer person");
+                return true;
+            }
+            else
+            {
+                ErrorProvider.SetError(txtNationalNO, "");
+                return false;
+            }
+
+        }
+
+        private bool _AcceptedData()
+        {
+            bool IsAccepted = true;
+
+            if (_Vaildtion(txtFristName) && _Vaildtion(txtSecondName) && _Vaildtion(txtLastName))
+                IsAccepted = false;
+
+            if (_Vaildtion(txtNationalNO) || _IsPersonExsits(txtNationalNO.Text))
+                IsAccepted = false;
+
+            if (!_EmailFormat())
+                IsAccepted = false;
+
+            if (_Vaildtion(txtPhone) && _Vaildtion(txtAddress))
+                IsAccepted = false;
+
+            return IsAccepted; 
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (!_AcceptedData())
+            {
+                MessageBox.Show("Complete the Requried Fields First", "Information", MessageBoxButtons.OK);
+                return;
+            }
+
+
+
             _Person.NationalNo = txtNationalNO.Text; 
 
             _Person.FirstName = txtFristName.Text;
@@ -138,6 +211,28 @@ namespace PresentationLayer.People
         private void frmAddOrUpdatePerson_Load(object sender, EventArgs e)
         {
             _Load();
+        }
+
+        private void txt_Validated(object sender, EventArgs e)
+        {
+            _Vaildtion((TextBox)sender);
+        }
+
+        private void txtEmail_Validated(object sender, EventArgs e)
+        {
+            if (_EmailFormat() == false)
+                ErrorProvider.SetError(txtEmail, "Invaild Email Format");
+            else
+                ErrorProvider.SetError(txtEmail, "");
+
+        }
+
+        private void txtNationalNO_Validated(object sender, EventArgs e)
+        {
+            _Vaildtion((TextBox)sender);
+
+            _IsPersonExsits(txtNationalNO.Text);
+
         }
     }
 }

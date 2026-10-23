@@ -89,7 +89,7 @@ namespace DataAccessLayer
                             People.ThirdName, People.LastName, People.DateOfBirth, Gendor = 
                     Case 
                     When Gendor = 1 then 'Female' when Gendor = 0 then 'Male' ELSE 'UnKnown' END,
-                            People.Address, People.Phone, People.Email, Countries.CountryName, People.ImagePath
+                            People.Address, People.Phone, People.Email, Countries.CountryName
                     FROM        Countries INNER JOIN
                                 People ON 
                     Countries.CountryID = People.NationalityCountryID 
@@ -300,6 +300,78 @@ namespace DataAccessLayer
 
         }
 
+        public static bool isPersonExists(string NationalNO)
+        {
+            bool isFound = false;
 
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string Query = @"Select Found = 1 from People 
+                             Where NationalNO = @NationalNO    
+                            ";
+
+
+            SqlCommand command = new SqlCommand(Query, connection);
+            command.Parameters.AddWithValue("@NationalNO", NationalNO);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                isFound = reader.HasRows;
+
+
+            }
+            catch
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+
+        }
+
+        public static bool isPersonExists(int PersonID)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string Query = @"Select Found = 1 from People 
+                             Where PersonID = @PersonID    
+                            ";
+
+
+            SqlCommand command = new SqlCommand(Query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                isFound = reader.HasRows;
+
+
+            }
+            catch
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+
+        }
     }
 }

@@ -125,6 +125,14 @@ namespace BusinessLayer
 
         }
 
+        public static bool isPersonExists(int PersonID)
+        {
+            return clsPersonData.isPersonExists(PersonID);
+        }
 
+        public static bool isPersonExists(string NationalNO)
+        {
+            return clsPersonData.isPersonExists(NationalNO);
+        }
     }
 }
