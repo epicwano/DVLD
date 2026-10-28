@@ -16,6 +16,12 @@ namespace BusinessLayer
             this.CountryName = CountryName;
         }
 
+        public clsCountry()
+        {
+            this.CountryID = -1;
+            this.CountryName = "";
+        }
+
         public static clsCountry Find(int CountryID)
         {
             string CountryName = "";

@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using PresentationLayer.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,16 +19,22 @@ namespace PresentationLayer.People
         private int _PersonID = -1;
         private ClsPerson _Person;
 
+
+        public frmAddOrUpdatePerson()
+        {
+            InitializeComponent();
+
+            _Mode = enMode.AddNew;
+
+        }
+
         public frmAddOrUpdatePerson(int PersonID)
         {
             InitializeComponent();
 
+            _Mode = enMode.Update;
             _PersonID = PersonID;
 
-            if (PersonID == -1)
-                _Mode = enMode.AddNew;
-            else
-                _Mode = enMode.Update;
 
         }
 
@@ -44,25 +51,62 @@ namespace PresentationLayer.People
 
         }
 
-        private void _Load()
+        private void _ResetDefualtValues()
         {
             _FillCountriesInComboBox();
-            cbCountries.SelectedText = "Yemen";
-
-            TimeSpan ts = new TimeSpan(6570, 0, 0, 0);
-            dtpDateOfBirth.MaxDate = DateTime.Now - ts;
-
-            rbMale.Select();
 
             if (_Mode == enMode.AddNew)
             {
                 lblAddOrUpdatePerson.Text = "Add New Person";
                 _Person = new ClsPerson();
-                return;
+            }
+            else
+            {
+                lblAddOrUpdatePerson.Text = "Update Person";
             }
 
+            if (rbMale.Checked)
+                pbPersonImage.Image = Resources.Male_512;
+            else
+                pbPersonImage.Image = Resources.Female_512;
+
+
+            llRemoveImage.Visible = (pbPersonImage.ImageLocation != null);
+
+
+            dtpDateOfBirth.MaxDate = DateTime.Now.AddYears(-18);
+            dtpDateOfBirth.Value = dtpDateOfBirth.MaxDate;
+
+            //should not allow adding age more than 100 years
+            dtpDateOfBirth.MinDate = DateTime.Now.AddYears(-100);
+
+            //this will set default country to jordan.
+            cbCountries.SelectedIndex = cbCountries.FindString("Saudi Arabia");
+
+            txtFristName.Text = "";
+            txtSecondName.Text = "";
+            txtThridName.Text = "";
+            txtLastName.Text = "";
+            txtNationalNO.Text = "";
+            rbMale.Checked = true;
+            txtPhone.Text = "";
+            txtEmail.Text = "";
+            txtAddress.Text = "";
+
+
+        }
+
+        private void _LoadData()
+        {
+
             _Person = ClsPerson.Find(_PersonID);
-            lblAddOrUpdatePerson.Text = "Update Person";
+
+            if (_Person == null)
+            {
+                MessageBox.Show("No Person with ID = " + _PersonID, "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.Close();
+                return;
+            }
 
             lblPersonID.Text = _Person.PersonID.ToString();
             lblNationalNO.Text = _Person.NationalNo;
@@ -75,19 +119,21 @@ namespace PresentationLayer.People
             dtpDateOfBirth.Value = _Person.DateOfBrith;
 
             if (_Person.Gendor == 0)
-                rbMale.Select();
+                rbMale.Checked = true;
             else
-                rbFemale.Select();
+                rbFemale.Checked = true;
 
             txtPhone.Text = _Person.Phone;
             txtEmail.Text = _Person.Email;
 
-            cbCountries.SelectedIndex = cbCountries.FindString(clsCountry.Find(_Person.Nationality).CountryName);
+            cbCountries.SelectedIndex = cbCountries.FindString(_Person.CountryInfo.CountryName);
 
             txtAddress.Text = _Person.Address;
 
             if (_Person.ImagePath != "")
                 pbPersonImage.Load(_Person.ImagePath);
+
+            llRemoveImage.Visible = (_Person.ImagePath != "");
 
         }
 
@@ -98,74 +144,20 @@ namespace PresentationLayer.People
 
         private bool _EmailFormat()
         {
-            if (txtEmail.Text != "" && (txtEmail.Text.Contains("@") && txtEmail.Text.Contains(".com")))
-                return true;
-            else if (txtEmail.Text == "")
+            if (txtEmail.Text.Contains("@") && txtEmail.Text.Contains(".com"))
                 return true;
             else
                 return false;
-   
-        }
-
-        private bool _Vaildtion(TextBox textBox)
-        {
-            if (textBox.Text == "")
-            {
-                ErrorProvider.SetError(textBox, "Requried to fill");
-                return true;
-            }
-            else
-            {
-                ErrorProvider.SetError(textBox, "");
-                return false;
-            }
-
-        }
-
-        private bool _IsPersonExsits(string NationalNO)
-        {
-
-            if (ClsPerson.isPersonExists(txtNationalNO.Text))
-            {
-                ErrorProvider.SetError(txtNationalNO, "National Number is used for anthoer person");
-                return true;
-            }
-            else
-            {
-                ErrorProvider.SetError(txtNationalNO, "");
-                return false;
-            }
-
-        }
-
-        private bool _AcceptedData()
-        {
-            bool IsAccepted = true;
-
-            if (_Vaildtion(txtFristName) && _Vaildtion(txtSecondName) && _Vaildtion(txtLastName))
-                IsAccepted = false;
-
-            if (_Vaildtion(txtNationalNO) || _IsPersonExsits(txtNationalNO.Text))
-                IsAccepted = false;
-
-            if (!_EmailFormat())
-                IsAccepted = false;
-
-            if (_Vaildtion(txtPhone) && _Vaildtion(txtAddress))
-                IsAccepted = false;
-
-            return IsAccepted; 
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!_AcceptedData())
+            if (!this.ValidateChildren())
             {
                 MessageBox.Show("Complete the Requried Fields First", "Information", MessageBoxButtons.OK);
+                this.Close();
                 return;
             }
-
-
 
             _Person.NationalNo = txtNationalNO.Text; 
 
@@ -193,34 +185,53 @@ namespace PresentationLayer.People
                 _Person.ImagePath = "";
 
             if (_Person.Save())
+            {
+                lblPersonID.Text = _Person.PersonID.ToString();
+                //change form mode to update.
+                _Mode = enMode.Update;
+                lblAddOrUpdatePerson.Text = "Update Person";
+
+
                 MessageBox.Show("Data Saved Successfully", "Confirmtion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
             {
                 MessageBox.Show("Error, Data Wasn`t Save Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-                
 
-
-            lblAddOrUpdatePerson.Text = "Update Person";
-            _Mode = enMode.Update;
-            lblPersonID.Text = _Person.PersonID.ToString();
-            lblNationalNO.Text = _Person.NationalNo;
         }
 
         private void frmAddOrUpdatePerson_Load(object sender, EventArgs e)
         {
-            _Load();
+            _ResetDefualtValues();
+
+            if (_Mode == enMode.Update)
+                _LoadData();
+
         }
 
         private void txt_Validated(object sender, EventArgs e)
         {
-            _Vaildtion((TextBox)sender);
+            TextBox Temp = ((TextBox)sender);
+            if (string.IsNullOrEmpty(Temp.Text.Trim()))
+            {
+                ErrorProvider.SetError(Temp, "This field is required!");
+            }
+            else
+            {
+                //e.Cancel = false;
+                ErrorProvider.SetError(Temp, null);
+            }
         }
 
         private void txtEmail_Validated(object sender, EventArgs e)
         {
-            if (_EmailFormat() == false)
+            if (txtEmail.Text.Trim() == "")
+                return;
+
+
+            if (!_EmailFormat())
                 ErrorProvider.SetError(txtEmail, "Invaild Email Format");
             else
                 ErrorProvider.SetError(txtEmail, "");
@@ -229,10 +240,63 @@ namespace PresentationLayer.People
 
         private void txtNationalNO_Validated(object sender, EventArgs e)
         {
-            _Vaildtion((TextBox)sender);
+            if (string.IsNullOrEmpty(txtNationalNO.Text.Trim()))
+            {
+                ErrorProvider.SetError(txtNationalNO, "This field is required!");
+                return;
+            }
+            else
+            {
+                ErrorProvider.SetError(txtNationalNO, null);
+            }
 
-            _IsPersonExsits(txtNationalNO.Text);
+            //Make sure the national number is not used by another person
+            if (txtNationalNO.Text.Trim() != _Person.NationalNo && ClsPerson.isPersonExists(txtNationalNO.Text.Trim()))
+            {
+                ErrorProvider.SetError(txtNationalNO, "National Number is used for another person!");
+            }
+            else
+            {
+                ErrorProvider.SetError(txtNationalNO, null);
+            }
+        }
 
+        private void rbMale_Click(object sender, EventArgs e)
+        {
+            if (pbPersonImage.ImageLocation == null)
+                pbPersonImage.Image = Resources.Male_512;
+        }
+
+        private void rbFemale_Click(object sender, EventArgs e)
+        {
+            if (pbPersonImage.ImageLocation == null)
+                pbPersonImage.Image = Resources.Female_512;
+        }
+
+        private void llRemoveImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            pbPersonImage.ImageLocation = null;
+
+            if (rbMale.Checked)
+                pbPersonImage.Image = Resources.Male_512;
+            else
+                pbPersonImage.Image = Resources.Female_512;
+
+            llRemoveImage.Visible = false;
+        }
+
+        private void llSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFilePath = openFileDialog1.FileName;
+                pbPersonImage.Load(selectedFilePath);
+                llRemoveImage.Visible = true;
+            }
         }
     }
 }

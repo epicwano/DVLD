@@ -5,7 +5,9 @@ namespace BusinessLayer
 {
     public class ClsPerson
     {
-        private enum enMode { AddNew = 1, Update = 2 };
+        public enum enMode { AddNew = 1, Update = 2 };
+
+        public enMode CurrentMode = enMode.AddNew;
 
         public int PersonID { get; set; }
         public string NationalNo { get; set; }
@@ -13,6 +15,14 @@ namespace BusinessLayer
         public string SecondName { get; set; }
         public string ThirdName { get; set; }
         public string LastName { get; set; }
+
+        public string FullName
+        {
+
+            get { return FirstName + " " + SecondName + " " + ThirdName + " " + LastName; }
+
+        }
+
         public DateTime DateOfBrith { get; set; }
         public byte Gendor { get; set; }
         public string Address { get; set; }
@@ -20,7 +30,9 @@ namespace BusinessLayer
         public string Email { get; set; }
         public int Nationality { get; set; }
         public string ImagePath { get; set; }
-        private enMode CurrentMode = enMode.AddNew;
+
+        public clsCountry CountryInfo;
+
 
         private ClsPerson(int PersonID,string NationalNo, string FirstName,string SecondName,string thirdName,string LastName
             ,DateTime DateOfBrith,byte Gendor,string Address,string Phone,string Email,int Nationality,string ImagePath)
@@ -38,6 +50,8 @@ namespace BusinessLayer
             this.Email = Email;
             this.Nationality = Nationality;
             this.ImagePath = ImagePath;
+
+            this.CountryInfo = clsCountry.Find(Nationality);
 
             this.CurrentMode = enMode.Update;
         }
@@ -72,6 +86,23 @@ namespace BusinessLayer
                 ref Gendor, ref Address, ref phone, ref Email, ref Nationality, ref ImagePath)))
             {
                 return new ClsPerson(PersonID,NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBrith, Gendor, Address, phone, Email, Nationality, ImagePath);
+            }
+            else
+                return null;
+
+        }
+
+        public static ClsPerson Find(string NationalNo)
+        {
+            string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", phone = "", Email = "", ImagePath = "";
+            DateTime DateOfBrith = DateTime.Now;
+            byte Gendor = 1;
+            int PersonID = -1 , Nationality = -1;
+
+            if ((clsPersonData.GetPersonByID(NationalNo, ref PersonID, ref FirstName, ref SecondName, ref ThirdName, ref LastName, ref DateOfBrith,
+                ref Gendor, ref Address, ref phone, ref Email, ref Nationality, ref ImagePath)))
+            {
+                return new ClsPerson(PersonID, NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBrith, Gendor, Address, phone, Email, Nationality, ImagePath);
             }
             else
                 return null;

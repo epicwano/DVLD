@@ -92,7 +92,6 @@ namespace PresentationLayer.People
         }
 
 
-
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmShowPersonDetails frm = new frmShowPersonDetails((int)dgvListPeople.CurrentRow.Cells[0].Value);
@@ -127,14 +126,14 @@ namespace PresentationLayer.People
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
-            frmAddOrUpdatePerson frm = new frmAddOrUpdatePerson(-1);
+            frmAddOrUpdatePerson frm = new frmAddOrUpdatePerson();
             frm.ShowDialog();
             _RefreshPeopleList();
         }
 
         private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddOrUpdatePerson frm = new frmAddOrUpdatePerson(-1);
+            frmAddOrUpdatePerson frm = new frmAddOrUpdatePerson();
             frm.ShowDialog();
             _RefreshPeopleList();
         }

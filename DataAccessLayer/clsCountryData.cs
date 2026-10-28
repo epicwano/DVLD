@@ -109,7 +109,7 @@ namespace DataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "Select * From Countries";
+            string Query = "Select * From Countries Order By CountryName";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
