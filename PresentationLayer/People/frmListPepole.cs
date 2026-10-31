@@ -22,9 +22,15 @@ namespace PresentationLayer.People
         enum enFilterBy {None = 0,PersonID = 1, NationalNo = 2, FirstName = 3, SecondName = 4, ThirdName = 5, LastName = 6,
             CountryName = 7, Gendor = 8, Email = 9, Phone = 10 }
 
-        DataView DV;
         enFilterBy Filter = (enFilterBy)0;
-        
+
+        private static DataTable _dtAllPeople = ClsPerson.GetAllPepole();
+
+        private DataTable _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
+                                                       "FirstName", "SecondName", "ThirdName", "LastName",
+                                                       "GendorCaption", "DateOfBirth", "CountryName",
+                                                       "Phone", "Email"); 
+
 
         private string FilterdDataView()
         {
@@ -42,18 +48,21 @@ namespace PresentationLayer.People
 
         private void _RefreshPeopleList()
         {
-            DV = ClsPerson.GetAllPepole().DefaultView;
-            dgvListPeople.DataSource = DV;
+            _dtAllPeople = ClsPerson.GetAllPepole();
+
+            _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
+                                                       "FirstName", "SecondName", "ThirdName", "LastName",
+                                                       "GendorCaption", "DateOfBirth", "CountryName",
+                                                       "Phone", "Email");
+
+            dgvListPeople.DataSource = _dtPeople;
             lblTotalRecords.Text = dgvListPeople.RowCount.ToString();
         }
 
         private void _Load()
         {
             _RefreshPeopleList();
-            DV.Table.CaseSensitive = false;
             cbFliterBy.SelectedIndex = 0;
-
-            
         }
 
         private void frmListPepole_Load(object sender, EventArgs e)
@@ -82,7 +91,7 @@ namespace PresentationLayer.People
 
         private void mtxtQueryParameter_TextChanged(object sender, EventArgs e)
         {
-            DV.RowFilter = FilterdDataView();
+            _dtPeople.DefaultView.RowFilter = FilterdDataView();
             lblTotalRecords.Text = dgvListPeople.RowCount.ToString();
         }
 

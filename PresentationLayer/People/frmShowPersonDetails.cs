@@ -20,5 +20,13 @@ namespace PresentationLayer.People
             //_PersonID = PersonID;
             ctrlPersonCard1.LoadPersonInfo(PersonID);
         }
+
+        public frmShowPersonDetails(string NationalNO)
+        {
+            InitializeComponent();
+            //_PersonID = PersonID;
+            ctrlPersonCard1.LoadPersonInfo(NationalNO);
+        }
+
     }
 }

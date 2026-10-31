@@ -14,6 +14,12 @@ namespace PresentationLayer.People
 {
     public partial class frmAddOrUpdatePerson : Form
     {
+
+        public delegate void DataBackEventHandler(object sender, int PersonID);
+
+        public event DataBackEventHandler DataBack;
+
+
         private enum enMode { AddNew = 1, Update = 2 };
         private enMode _Mode = enMode.AddNew;
         private int _PersonID = -1;
@@ -131,7 +137,7 @@ namespace PresentationLayer.People
             txtAddress.Text = _Person.Address;
 
             if (_Person.ImagePath != "")
-                pbPersonImage.Load(_Person.ImagePath);
+                pbPersonImage.ImageLocation = _Person.ImagePath;
 
             llRemoveImage.Visible = (_Person.ImagePath != "");
 
@@ -193,6 +199,8 @@ namespace PresentationLayer.People
 
 
                 MessageBox.Show("Data Saved Successfully", "Confirmtion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                DataBack?.Invoke(this,_Person.PersonID);
             }
             else
             {
