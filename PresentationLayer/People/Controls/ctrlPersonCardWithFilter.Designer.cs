@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ctrlPersonCard1 = new PresentationLayer.People.Controls.ctrlPersonCard();
             this.gbFilterPerson = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbFIlterBy = new System.Windows.Forms.ComboBox();
-            this.btnFindPerson = new System.Windows.Forms.Button();
-            this.btnAddNewPerson = new System.Windows.Forms.Button();
             this.mtxtSelectedPerson = new System.Windows.Forms.MaskedTextBox();
+            this.btnAddNewPerson = new System.Windows.Forms.Button();
+            this.btnFindPerson = new System.Windows.Forms.Button();
+            this.cbFIlterBy = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbFilterPerson.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // ctrlPersonCard1
@@ -60,14 +63,35 @@
             this.gbFilterPerson.TabStop = false;
             this.gbFilterPerson.Text = "Filter";
             // 
-            // label1
+            // mtxtSelectedPerson
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 19);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Find By";
+            this.mtxtSelectedPerson.Location = new System.Drawing.Point(339, 41);
+            this.mtxtSelectedPerson.Mask = "000000";
+            this.mtxtSelectedPerson.Name = "mtxtSelectedPerson";
+            this.mtxtSelectedPerson.Size = new System.Drawing.Size(221, 27);
+            this.mtxtSelectedPerson.TabIndex = 5;
+            this.mtxtSelectedPerson.ValidatingType = typeof(int);
+            this.mtxtSelectedPerson.Validated += new System.EventHandler(this.mtxtSelectedPerson_Validated);
+            // 
+            // btnAddNewPerson
+            // 
+            this.btnAddNewPerson.Location = new System.Drawing.Point(686, 33);
+            this.btnAddNewPerson.Name = "btnAddNewPerson";
+            this.btnAddNewPerson.Size = new System.Drawing.Size(56, 41);
+            this.btnAddNewPerson.TabIndex = 4;
+            this.btnAddNewPerson.Text = "Add";
+            this.btnAddNewPerson.UseVisualStyleBackColor = true;
+            this.btnAddNewPerson.Click += new System.EventHandler(this.btnAddNewPerson_Click);
+            // 
+            // btnFindPerson
+            // 
+            this.btnFindPerson.Location = new System.Drawing.Point(606, 33);
+            this.btnFindPerson.Name = "btnFindPerson";
+            this.btnFindPerson.Size = new System.Drawing.Size(56, 41);
+            this.btnFindPerson.TabIndex = 3;
+            this.btnFindPerson.Text = "find";
+            this.btnFindPerson.UseVisualStyleBackColor = true;
+            this.btnFindPerson.Click += new System.EventHandler(this.btnFindPerson_Click);
             // 
             // cbFIlterBy
             // 
@@ -81,34 +105,18 @@
             this.cbFIlterBy.TabIndex = 1;
             this.cbFIlterBy.SelectedIndexChanged += new System.EventHandler(this.cbFIlterBy_SelectedIndexChanged);
             // 
-            // btnFindPerson
+            // label1
             // 
-            this.btnFindPerson.Location = new System.Drawing.Point(606, 33);
-            this.btnFindPerson.Name = "btnFindPerson";
-            this.btnFindPerson.Size = new System.Drawing.Size(56, 41);
-            this.btnFindPerson.TabIndex = 3;
-            this.btnFindPerson.Text = "find";
-            this.btnFindPerson.UseVisualStyleBackColor = true;
-            this.btnFindPerson.Click += new System.EventHandler(this.btnFindPerson_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(74, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 19);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Find By";
             // 
-            // btnAddNewPerson
+            // errorProvider1
             // 
-            this.btnAddNewPerson.Location = new System.Drawing.Point(686, 33);
-            this.btnAddNewPerson.Name = "btnAddNewPerson";
-            this.btnAddNewPerson.Size = new System.Drawing.Size(56, 41);
-            this.btnAddNewPerson.TabIndex = 4;
-            this.btnAddNewPerson.Text = "Add";
-            this.btnAddNewPerson.UseVisualStyleBackColor = true;
-            this.btnAddNewPerson.Click += new System.EventHandler(this.btnAddNewPerson_Click);
-            // 
-            // mtxtSelectedPerson
-            // 
-            this.mtxtSelectedPerson.Location = new System.Drawing.Point(339, 41);
-            this.mtxtSelectedPerson.Mask = "000000";
-            this.mtxtSelectedPerson.Name = "mtxtSelectedPerson";
-            this.mtxtSelectedPerson.Size = new System.Drawing.Size(221, 27);
-            this.mtxtSelectedPerson.TabIndex = 5;
-            this.mtxtSelectedPerson.ValidatingType = typeof(int);
+            this.errorProvider1.ContainerControl = this;
             // 
             // ctrlPersonCardWithFilter
             // 
@@ -120,6 +128,7 @@
             this.Size = new System.Drawing.Size(772, 468);
             this.gbFilterPerson.ResumeLayout(false);
             this.gbFilterPerson.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -133,5 +142,6 @@
         private System.Windows.Forms.ComboBox cbFIlterBy;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MaskedTextBox mtxtSelectedPerson;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

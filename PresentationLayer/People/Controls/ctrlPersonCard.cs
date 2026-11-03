@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DVLD.Properties;
+using PresentationLayer.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -95,16 +96,17 @@ namespace PresentationLayer.People.Controls
             lblDateOfBirth.Text = "[????]";
             lblCountry.Text = "[????]";
             lblAddress.Text = "[????]";
-            pbPersonPicture.Image = Resources.Male_512;
+            pbPersonPicture.Image = Properties.Resources.Male_512;
 
         }
 
         private void _LoadPersonImage()
         {
+
             if (_Person.Gendor == 0)
-                pbPersonPicture.Image = Resources.Male_512;
+                pbPersonPicture.Image = Properties.Resources.Male_512;
             else
-                pbPersonPicture.Image = Resources.Female_512;
+                pbPersonPicture.Image = Properties.Resources.Female_512;
 
             if (_Person.ImagePath != "")
                 pbPersonPicture.ImageLocation = _Person.ImagePath;

@@ -1,4 +1,7 @@
-﻿using PresentationLayer.People;
+﻿using PresentationLayer.Global_Classes;
+using PresentationLayer.Login;
+using PresentationLayer.People;
+using PresentationLayer.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +25,22 @@ namespace PresentationLayer
         {
             frmListPepole frm = new frmListPepole();
             frm.ShowDialog();
+        }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+            clsGlobal.CurrentUser = null;
+            frmLoginScreen frm = new frmLoginScreen();
+            frm.Show();
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListUsers frm = new frmListUsers();
+            frm.ShowDialog();
+
         }
     }
 }

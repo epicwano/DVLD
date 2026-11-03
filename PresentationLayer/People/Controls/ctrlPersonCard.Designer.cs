@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.gbPersonDetails = new System.Windows.Forms.GroupBox();
+            this.lblDateOfBirth = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.llEditPersonInfo = new System.Windows.Forms.LinkLabel();
             this.lblCountry = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
@@ -46,9 +49,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.llEditPersonInfo = new System.Windows.Forms.LinkLabel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblDateOfBirth = new System.Windows.Forms.Label();
             this.gbPersonDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonPicture)).BeginInit();
             this.SuspendLayout();
@@ -82,6 +82,35 @@
             this.gbPersonDetails.TabIndex = 0;
             this.gbPersonDetails.TabStop = false;
             this.gbPersonDetails.Text = "PersonDetails";
+            // 
+            // lblDateOfBirth
+            // 
+            this.lblDateOfBirth.AutoSize = true;
+            this.lblDateOfBirth.Location = new System.Drawing.Point(430, 138);
+            this.lblDateOfBirth.Name = "lblDateOfBirth";
+            this.lblDateOfBirth.Size = new System.Drawing.Size(33, 19);
+            this.lblDateOfBirth.TabIndex = 19;
+            this.lblDateOfBirth.Text = "???";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(310, 138);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(101, 19);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Date Of Birth";
+            // 
+            // llEditPersonInfo
+            // 
+            this.llEditPersonInfo.AutoSize = true;
+            this.llEditPersonInfo.Location = new System.Drawing.Point(567, 44);
+            this.llEditPersonInfo.Name = "llEditPersonInfo";
+            this.llEditPersonInfo.Size = new System.Drawing.Size(123, 19);
+            this.llEditPersonInfo.TabIndex = 17;
+            this.llEditPersonInfo.TabStop = true;
+            this.llEditPersonInfo.Text = "Edit Person Info";
+            this.llEditPersonInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llEditPersonInfo_LinkClicked);
             // 
             // lblCountry
             // 
@@ -158,9 +187,11 @@
             // 
             // pbPersonPicture
             // 
+            this.pbPersonPicture.Image = global::PresentationLayer.Properties.Resources.Male_512;
             this.pbPersonPicture.Location = new System.Drawing.Point(531, 89);
             this.pbPersonPicture.Name = "pbPersonPicture";
             this.pbPersonPicture.Size = new System.Drawing.Size(208, 262);
+            this.pbPersonPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPersonPicture.TabIndex = 8;
             this.pbPersonPicture.TabStop = false;
             // 
@@ -236,35 +267,6 @@
             this.label1.Size = new System.Drawing.Size(105, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "PersonID : ";
-            // 
-            // llEditPersonInfo
-            // 
-            this.llEditPersonInfo.AutoSize = true;
-            this.llEditPersonInfo.Location = new System.Drawing.Point(567, 44);
-            this.llEditPersonInfo.Name = "llEditPersonInfo";
-            this.llEditPersonInfo.Size = new System.Drawing.Size(123, 19);
-            this.llEditPersonInfo.TabIndex = 17;
-            this.llEditPersonInfo.TabStop = true;
-            this.llEditPersonInfo.Text = "Edit Person Info";
-            this.llEditPersonInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llEditPersonInfo_LinkClicked);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(310, 138);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 19);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Date Of Birth";
-            // 
-            // lblDateOfBirth
-            // 
-            this.lblDateOfBirth.AutoSize = true;
-            this.lblDateOfBirth.Location = new System.Drawing.Point(430, 138);
-            this.lblDateOfBirth.Name = "lblDateOfBirth";
-            this.lblDateOfBirth.Size = new System.Drawing.Size(33, 19);
-            this.lblDateOfBirth.TabIndex = 19;
-            this.lblDateOfBirth.Text = "???";
             // 
             // ctrlPersonCard
             // 
