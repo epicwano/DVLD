@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,44 @@ namespace PresentationLayer.People.Controls
             InitializeComponent();
         }
 
+        public int PersonID
+        {
+            get { return ctrlPersonCard1.PersonID; }
+        }
+
+        public ClsPerson SelectedPersonInfo
+        {
+
+            get { return ctrlPersonCard1.SelectedPersonInfo; }
+
+        }
+
+        public void LoadPersonInfo(int PersonID)
+        {
+            cbFIlterBy.SelectedIndex = 0;
+            mtxtSelectedPerson.Text = PersonID.ToString();
+
+            FindNow();
+        }
+
+        private void FindNow()
+        {
+            switch (cbFIlterBy.Text)
+            {
+                case "PersonID":
+                    ctrlPersonCard1.LoadPersonInfo(int.Parse(mtxtSelectedPerson.Text));
+
+                    break;
+
+                case "NationalNo.":
+                    ctrlPersonCard1.LoadPersonInfo(mtxtSelectedPerson.Text);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         private void cbFIlterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbFIlterBy.SelectedIndex == 0)
@@ -28,13 +67,15 @@ namespace PresentationLayer.People.Controls
 
         private void btnFindPerson_Click(object sender, EventArgs e)
         {
+            if (!this.ValidateChildren())
+            {
+                //Here we dont continue becuase the form is not valid
+                MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
-            if (cbFIlterBy.SelectedText == "PersonID")
-                ctrlPersonCard1.LoadPersonInfo(int.Parse(mtxtSelectedPerson.Text));
-            else
-                ctrlPersonCard1.LoadPersonInfo(mtxtSelectedPerson.Text);
+            }
 
-
+            FindNow();
         }
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
@@ -51,7 +92,15 @@ namespace PresentationLayer.People.Controls
             ctrlPersonCard1.LoadPersonInfo(PersonID);
         }
 
+        private void mtxtSelectedPerson_Validated(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(mtxtSelectedPerson.Text))
+                errorProvider1.SetError(mtxtSelectedPerson, "This field is required!");
+            else
+                errorProvider1.SetError(mtxtSelectedPerson, null);
 
+
+        }
     }
 
 

@@ -35,6 +35,7 @@
             this.lblNationalNO = new System.Windows.Forms.Label();
             this.lblPersonID = new System.Windows.Forms.Label();
             this.plPersonInfo = new System.Windows.Forms.Panel();
+            this.llRemoveImage = new System.Windows.Forms.LinkLabel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -64,7 +65,6 @@
             this.txtFristName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.llRemoveImage = new System.Windows.Forms.LinkLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.plPersonInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
@@ -157,6 +157,17 @@
             this.plPersonInfo.Name = "plPersonInfo";
             this.plPersonInfo.Size = new System.Drawing.Size(981, 489);
             this.plPersonInfo.TabIndex = 5;
+            // 
+            // llRemoveImage
+            // 
+            this.llRemoveImage.AutoSize = true;
+            this.llRemoveImage.Location = new System.Drawing.Point(807, 383);
+            this.llRemoveImage.Name = "llRemoveImage";
+            this.llRemoveImage.Size = new System.Drawing.Size(77, 23);
+            this.llRemoveImage.TabIndex = 34;
+            this.llRemoveImage.TabStop = true;
+            this.llRemoveImage.Text = "Remove";
+            this.llRemoveImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llRemoveImage_LinkClicked);
             // 
             // btnSave
             // 
@@ -257,7 +268,7 @@
             this.pbPersonImage.Location = new System.Drawing.Point(755, 134);
             this.pbPersonImage.Name = "pbPersonImage";
             this.pbPersonImage.Size = new System.Drawing.Size(191, 193);
-            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbPersonImage.TabIndex = 24;
             this.pbPersonImage.TabStop = false;
             // 
@@ -444,17 +455,6 @@
             // ErrorProvider
             // 
             this.ErrorProvider.ContainerControl = this;
-            // 
-            // llRemoveImage
-            // 
-            this.llRemoveImage.AutoSize = true;
-            this.llRemoveImage.Location = new System.Drawing.Point(807, 383);
-            this.llRemoveImage.Name = "llRemoveImage";
-            this.llRemoveImage.Size = new System.Drawing.Size(77, 23);
-            this.llRemoveImage.TabIndex = 34;
-            this.llRemoveImage.TabStop = true;
-            this.llRemoveImage.Text = "Remove";
-            this.llRemoveImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llRemoveImage_LinkClicked);
             // 
             // openFileDialog1
             // 
