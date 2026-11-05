@@ -357,6 +357,37 @@ namespace DataAccessLayer
             return HasAccount;
 
         }
+    
+        public static bool Delete(int UserID)
+        {
+            int RowsAffected = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string Query =
+                @"
+                    Delete From Users Where UserID = @UserID;
+                ";
+
+            SqlCommand command = new SqlCommand(Query, connection);
+            command.Parameters.AddWithValue("@UserID", UserID);
+
+            try
+            {
+                connection.Open();
+                RowsAffected = command.ExecuteNonQuery();
+            }
+            catch
+            {
+                // do something
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return (RowsAffected > 0);
+        }
     }
 
 }

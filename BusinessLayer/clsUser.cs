@@ -125,6 +125,10 @@ namespace BusinessLayer
 
         }
 
+        public static bool Delete(int UserID)
+        {
+            return clsUserData.Delete(UserID);
+        }
 
 
     }

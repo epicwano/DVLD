@@ -47,7 +47,7 @@ namespace PresentationLayer.People.Controls
 
                     break;
 
-                case "NationalNo.":
+                case "NationalNO.":
                     ctrlPersonCard1.LoadPersonInfo(mtxtSelectedPerson.Text);
                     break;
 

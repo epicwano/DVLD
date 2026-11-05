@@ -137,5 +137,60 @@ namespace PresentationLayer.Users
             frm.ShowDialog();
             _RefreshUsersList();
         }
+
+        private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddNewOrUpdateUser frm = new frmAddNewOrUpdateUser();
+            frm.ShowDialog();
+            _RefreshUsersList();
+        }
+
+
+
+        private void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This feature is not available yet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowUserDetails frm = new frmShowUserDetails((int)dgvListAllUsers.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            _RefreshUsersList();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddNewOrUpdateUser frm = new frmAddNewOrUpdateUser((int)dgvListAllUsers.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            _RefreshUsersList();
+        }
+
+        private void sendEmailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This feature is not available yet.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ChangePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangeUserPassword frm = new frmChangeUserPassword((int)dgvListAllUsers.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You Srue you want to delete this User", "Confrimtion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (clsUser.Delete((int)dgvListAllUsers.CurrentRow.Cells[0].Value) == true)
+                {
+                    MessageBox.Show("User With ID " + (int)dgvListAllUsers.CurrentRow.Cells[0].Value + "Deleted succssfully");
+                    _RefreshUsersList();
+                }
+                else
+                {
+                    MessageBox.Show("Cannot delete this user because they are involved with other things");
+                }
+            }
+        }
     }
 }

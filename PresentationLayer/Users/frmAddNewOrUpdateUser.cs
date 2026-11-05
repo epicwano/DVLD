@@ -44,6 +44,7 @@ namespace PresentationLayer.Users
             } 
             else
                 lblTitle.Text = "Update User";
+                
 
 
             txtUserName.Text = "";
@@ -70,6 +71,7 @@ namespace PresentationLayer.Users
             txtPassword.Text = _User.Password;
             chkIsActive.Checked = _User.IsActive;
 
+            ctrlPersonCardWithFilter1.Enabled = false;
         }
 
         private void frmAddNewOrUpdateUser_Load(object sender, EventArgs e)
@@ -132,8 +134,11 @@ namespace PresentationLayer.Users
             {
                 lblUserID.Text = _User.UserID.ToString();
 
-                _Mode = enMode.Update;
                 MessageBox.Show("Data Saved Successfully", "Confirmtion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _Mode = enMode.Update;
+                lblTitle.Text = "Update User";
+                ctrlPersonCardWithFilter1.Enabled = false;
             }
             else
             {
