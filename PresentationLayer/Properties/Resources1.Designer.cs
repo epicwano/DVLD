@@ -22,7 +22,7 @@ namespace PresentationLayer.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PresentationLayer.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PresentationLayer.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace PresentationLayer.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,21 @@ namespace PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Add_New_User_32 {
+            get {
+                object obj = ResourceManager.GetObject("Add_New_User_32", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Add_New_User__icon_32 {
+        public static System.Drawing.Bitmap Add_New_User_72 {
             get {
-                object obj = ResourceManager.GetObject("Add_New_User _icon_32", resourceCulture);
+                object obj = ResourceManager.GetObject("Add_New_User_72", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +83,9 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Add_New_User_72 {
+        public static System.Drawing.Bitmap cross_32 {
             get {
-                object obj = ResourceManager.GetObject("Add New User 72", resourceCulture);
+                object obj = ResourceManager.GetObject("cross_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +93,9 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cross_32 {
+        public static System.Drawing.Bitmap Driver_Main {
             get {
-                object obj = ResourceManager.GetObject("cross 32", resourceCulture);
+                object obj = ResourceManager.GetObject("Driver_Main", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +103,9 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Driver_Main {
+        public static System.Drawing.Bitmap DVLD_Logo {
             get {
-                object obj = ResourceManager.GetObject("Driver Main", resourceCulture);
+                object obj = ResourceManager.GetObject("DVLD_Logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,17 +113,7 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DVLD_Logo {
-            get {
-                object obj = ResourceManager.GetObject("DVLD Logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Female_512 {
+        public static System.Drawing.Bitmap Female_512 {
             get {
                 object obj = ResourceManager.GetObject("Female_512", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,17 +123,7 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap IconLogo {
-            get {
-                object obj = ResourceManager.GetObject("IconLogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Male_512 {
+        public static System.Drawing.Bitmap Male_512 {
             get {
                 object obj = ResourceManager.GetObject("Male_512", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,19 +133,9 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sign_in32 {
+        public static System.Drawing.Bitmap sign_in32 {
             get {
                 object obj = ResourceManager.GetObject("sign_in32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap sign_out32 {
-            get {
-                object obj = ResourceManager.GetObject("sign_out32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

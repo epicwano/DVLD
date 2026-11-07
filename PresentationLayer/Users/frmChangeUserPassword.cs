@@ -46,6 +46,16 @@ namespace PresentationLayer.Users
 
         private void txtCurrentPassword_Validated(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtCurrentPassword.Text))
+            {
+                errorProvider1.SetError(txtCurrentPassword, "Current password is required.");
+                return;
+            }
+            else
+            {
+                errorProvider1.SetError(txtCurrentPassword, null);
+            }
+
             if (User.Password != txtCurrentPassword.Text)
                 errorProvider1.SetError(txtCurrentPassword, "Incorrect Password");
             else
@@ -85,9 +95,18 @@ namespace PresentationLayer.Users
 
         }
 
-
-        
-    
+        private void txtNewPassword_Validated(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtNewPassword.Text.Trim()))
+            {
+                errorProvider1.SetError(txtNewPassword, "New Password cannot be blank");
+            }
+            else
+            {
+                errorProvider1.SetError(txtNewPassword, null);
+            }
+            ;
+        }
     }   
 
 

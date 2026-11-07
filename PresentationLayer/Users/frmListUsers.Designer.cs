@@ -104,7 +104,6 @@
             // 
             this.btnAdddNewUser.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnAdddNewUser.Font = new System.Drawing.Font("Tahoma", 13F);
-            this.btnAdddNewUser.Image = global::PresentationLayer.Properties.Resources.Add_New_User__icon_32;
             this.btnAdddNewUser.Location = new System.Drawing.Point(815, 252);
             this.btnAdddNewUser.Name = "btnAdddNewUser";
             this.btnAdddNewUser.Size = new System.Drawing.Size(132, 113);

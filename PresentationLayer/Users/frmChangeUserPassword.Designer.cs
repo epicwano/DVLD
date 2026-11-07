@@ -46,7 +46,7 @@
             // 
             this.ctrlUserInfo1.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ctrlUserInfo1.Location = new System.Drawing.Point(28, 22);
-            this.ctrlUserInfo1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ctrlUserInfo1.Margin = new System.Windows.Forms.Padding(4);
             this.ctrlUserInfo1.Name = "ctrlUserInfo1";
             this.ctrlUserInfo1.Size = new System.Drawing.Size(774, 493);
             this.ctrlUserInfo1.TabIndex = 0;
@@ -98,6 +98,7 @@
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(198, 20);
             this.txtNewPassword.TabIndex = 5;
+            this.txtNewPassword.Validated += new System.EventHandler(this.txtNewPassword_Validated);
             // 
             // txtConfirmPassword
             // 

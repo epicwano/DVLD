@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace PresentationLayer
 {
     public partial class frmMain : Form
@@ -41,6 +40,18 @@ namespace PresentationLayer
             frmListUsers frm = new frmListUsers();
             frm.ShowDialog();
 
+        }
+
+        private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowUserDetails frm = new frmShowUserDetails(clsGlobal.CurrentUser.UserID);
+            frm.ShowDialog();
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangeUserPassword frm = new frmChangeUserPassword(clsGlobal.CurrentUser.UserID);
+            frm.ShowDialog();
         }
     }
 }

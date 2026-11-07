@@ -21,13 +21,12 @@ namespace PresentationLayer.Users
 
             UserID = userID;
 
-            ctrlUserInfo1.LoadUserInfo(UserID);
+            
         }
 
-        
-
-
-
-
+        private void ctrlUserInfo1_Load(object sender, EventArgs e)
+        {
+            ctrlUserInfo1.LoadUserInfo(UserID);
+        }
     }
 }

@@ -19,28 +19,34 @@ namespace PresentationLayer.Login
             InitializeComponent();
         }
 
-        private bool IsVaildUser()
-        {
-            if (clsUser.IsUserExists(txtUserName.Text, txtPassword.Text) && clsUser.IsUserActive(txtUserName.Text, txtPassword.Text))
-            {
-                clsGlobal.CurrentUser = clsUser.Find(txtUserName.Text, txtPassword.Text);
-                return true;
-            }
-            else
-                return false;
-        }
+        
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            clsUser user = clsUser.Find(txtUserName.Text.Trim(), txtPassword.Text.Trim());
 
-            if (IsVaildUser())
+            if (user != null)
             {
-                frmMain frm = new frmMain();
-                frm.Show();
+                if (!user.IsActive)
+                {
+                    txtUserName.Focus();
+                    MessageBox.Show("Your accound is not Active, Contact Admin.", "In Active Account", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+                clsGlobal.CurrentUser = user;
                 this.Hide();
+                frmMain frm = new frmMain();
+                frm.ShowDialog();
             }
             else
-                MessageBox.Show("Invaild UserName Or Password","Wrong!",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            {
+                txtUserName.Focus();
+                MessageBox.Show("Invalid Username/Password.", "Wrong Credintials", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
